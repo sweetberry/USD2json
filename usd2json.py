@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import os.path
 import json
-from pxr import Usd, UsdGeom, Gf, Sdf
+from pxr import Usd, UsdGeom, Gf
 from tkinterdnd2 import DND_FILES, TkinterDnD
 
 root = TkinterDnD.Tk()
@@ -108,7 +108,7 @@ def main():
 
 def reset_gui():
     global IMPORT_FILE_PATH, CAMERA_NAME_LIST, NULL_NAME_LIST, export_btn, stage
-    IMPORT_FILE_PATH.set("Could not open USD.")
+    IMPORT_FILE_PATH.set("Could not open USD Stage")
     # noinspection PyTypeChecker
     CAMERA_NAME_LIST.set([])
     # noinspection PyTypeChecker
@@ -129,8 +129,17 @@ def get_stage(usd_path):
     return stage
 
 
+def check_pers_cam(_prim):
+    if _prim.GetTypeName() == "Camera":
+        usd_geom_cam: UsdGeom.Camera = UsdGeom.Camera(_prim)
+        current_gf_camera = usd_geom_cam.GetCamera(1)
+        if current_gf_camera.projection == 'perspective':
+            return True
+    return False
+
+
 def find_cameras(_stage):
-    return list(filter(lambda _prim: _prim.GetTypeName() == "Camera", _stage.Traverse()))
+    return list(filter(check_pers_cam, _stage.Traverse()))
 
 
 def find_nulls(_stage):
@@ -190,6 +199,8 @@ def parse_camera(camera: Usd.Prim, _stage: Usd.Stage):
     focus_distance = []
     f_stop = []
     transform = []
+    if start_frame == end_frame:
+        end_frame += 1
 
     for current_time in range(int(start_frame), int(end_frame), 1):
         current_gf_camera = usd_geom_cam.GetCamera(current_time)
@@ -225,7 +236,8 @@ def parse_null(null: Usd.Prim, _stage: Usd.Stage):
     meter_per_unit = UsdGeom.GetStageMetersPerUnit(stage)
     fps = _stage.GetFramesPerSecond()
     transform = []
-
+    if start_frame == end_frame:
+        end_frame += 1
     for current_time in range(int(start_frame), int(end_frame), 1):
         xform = UsdGeom.Xformable(null)
         world_transform: Gf.Matrix4d = xform.ComputeLocalToWorldTransform(current_time)
