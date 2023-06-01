@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import os.path
 import json
-from pxr import Usd, UsdGeom, Gf
+from pxr import Usd, UsdGeom, Gf, Sdf
 from tkinterdnd2 import DND_FILES, TkinterDnD
 
 root = TkinterDnD.Tk()
@@ -21,7 +21,6 @@ def on_drop(event):
     global IMPORT_FILE_PATH, cameras, nulls, CAMERA_NAME_LIST, NULL_NAME_LIST
     IMPORT_FILE_PATH.set(event.data)
     print('drop fileName=%s' % IMPORT_FILE_PATH.get())
-    get_stage(IMPORT_FILE_PATH.get())
 
     _stage = get_stage(IMPORT_FILE_PATH.get())
     if _stage:
