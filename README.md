@@ -21,13 +21,17 @@ pip install pipenv
 
 
 ```bash
+# プロジェクトの初期化
+pipenv --python 3.10
+
+# パッケージのインストール
 pipenv install
+
+# アプリが起動します。
+pipenv run app
+
 ```
 
-```bash
-pipenv run app
-# アプリが起動します。
-```
 
 - for Windows 
 ```bash
