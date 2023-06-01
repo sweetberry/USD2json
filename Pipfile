@@ -7,6 +7,7 @@ name = "pypi"
 usd-core = "*"
 tkinterdnd2 = "*"
 setuptools = "==67.8.0"
+pyinstaller = "*"
 
 [dev-packages]
 
@@ -17,3 +18,4 @@ python_full_version = "3.10.11"
 [scripts]
 app = "python ./usd2json.py"
 makeCommand = "bash ./makeCommandFile.sh"
+makeExe = "pyinstaller --clean -w -F -i ./icons/icon.ico --collect-all tkinterdnd2 --collect-all pxr ./usd2json.py"

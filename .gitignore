@@ -1,3 +1,6 @@
+# プロジェクトの除外パス
+/etc/
+/output/
 /build/
 /dist/
-/etc/
+/*.spec

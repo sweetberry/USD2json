@@ -17,24 +17,36 @@ AfterEffects でカメラやヌルの Import&Export のために作成しまし�
 # pipenv を導入済みであれば必要ありません。
 pip install pipenv
 ```
+
+
+
 ```bash
 pipenv install
 ```
 
+```bash
+pipenv run app
+# アプリが起動します。
+```
+
+- for Windows 
+```bash
+# exe ファイルが作成されます。
+pipenv run makeExe
+```
+
 - for OSX
 ```bash
-pipenv run makeCommand
 # usd2json.command ファイルが作成されダブルクリックで起動します。
+pipenv run makeCommand
 ```
 # Usage
 
-DEMOの実行方法など、"hoge"の基本的な使い方を説明する
+- アプリのウインドウにUSDファイルをドロップ。  
+- 書き出したいカメラやXFormを選択し、
+- Exportを押してください。  
+- .jsonファイルが書き出されます。
 
-```bash
-git clone https://github.com/hoge/~
-cd examples
-python demo.py
-```
 
 # Note
 
