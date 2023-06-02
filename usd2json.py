@@ -143,7 +143,13 @@ def find_cameras(_stage):
 
 
 def find_nulls(_stage):
-    xforms = filter(lambda _prim: _prim.GetTypeName() == "Xform", _stage.Traverse())
+    prims = _stage.Traverse()
+    xforms = []
+    for _prim in prims:
+        pts_attr: Usd.Attribute = _prim.GetAttribute("xformOpOrder")
+        if pts_attr.IsValid():
+            xforms.append(_prim)
+
     _nulls = []
     for xform in xforms:
         # cameraの親Xformが含まれているのを外したい
