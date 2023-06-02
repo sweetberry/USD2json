@@ -133,7 +133,7 @@ def check_pers_cam(_prim):
     if _prim.GetTypeName() == "Camera":
         usd_geom_cam: UsdGeom.Camera = UsdGeom.Camera(_prim)
         current_gf_camera = usd_geom_cam.GetCamera(1)
-        if current_gf_camera.projection == 'perspective':
+        if current_gf_camera.projection == Gf.Camera.Perspective:
             return True
     return False
 
