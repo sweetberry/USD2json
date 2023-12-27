@@ -16,6 +16,8 @@ cameras: list[UsdGeom.Camera] | None = None
 nulls: list[UsdGeom.Xform] | None = None
 stage: Usd.Stage | None = None
 
+version_string = "v0.0.3"
+
 
 def on_drop(event):
     global IMPORT_FILE_PATH, cameras, nulls, CAMERA_NAME_LIST, NULL_NAME_LIST
@@ -59,7 +61,7 @@ def main():
     ####
 
     root.geometry("650x500")
-    root.title('usd2json')
+    root.title('usd2json ' + version_string)
     root.drop_target_register(DND_FILES)
     root.dnd_bind(sequence="<<Drop>>", func=on_drop)
 
