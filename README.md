@@ -41,8 +41,8 @@ pipenv run makeExe
 
 - for OSX
 ```bash
-# usd2json.command ファイルが作成されダブルクリックで起動します。
-pipenv run makeCommand
+# app ファイルが作成されます。
+pipenv run makeApp
 ```
 # Usage
 
@@ -50,15 +50,6 @@ pipenv run makeCommand
 - 書き出したいカメラやXFormを選択し、
 - Exportを押してください。  
 - .jsonファイルが書き出されます。
-
-
-# Note
-
-現状 OSX 環境下で pyinnstaller での app 化がうまくいかない状況です。  
-( pxr モジュール使用時に Segmentation fault: 11 で落ちる)  
-その回避策として .command ファイルを作成しています。
-
-もし上手くapp化できた方がおられましたらご一報ください。
 
 # Author
 
